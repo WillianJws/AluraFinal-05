@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas Finais</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="titulo">
+        <h2>Quiz final</h2>
+    </div>
+    <div class="conteudo-jogo">
+        <section class="questionario">
+            <div class="conteudo">
+                <span class="progresso">Pergunta 1 de 5</span>
+                <h3 class="pergunta">Qual é a capital da França?</h3>
+                <div class="respostas">
+                    <button class="resposta" data-answer="A">Paris</button>
+                    <button class="resposta" data-answer="B">Londres</button>
+                    <button class="resposta" data-answer="C">Roma</button>
+                    <button class="resposta" data-answer="D">Berlim</button>
+                </div>
+            </div>
+            
+            <div class="fim" style="display: none;">
+                <span>Fim do jogo! Você acertou <span id="score">0</span> de <span id="total">0</span> perguntas.</span>
+                <button id="reiniciar" class="reiniciar">Tentar novamente</button> <!-- Botão Tentar Novamente -->
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const respostas = document.querySelectorAll('.resposta');
+        const progresso = document.querySelector('.progresso');
+        const fim = document.querySelector('.fim');
+        const scoreElement = document.getElementById('score');
+        const totalElement = document.getElementById('total');
+        const reiniciarBtn = document.getElementById('reiniciar');
+        let questionIndex = 0;
+        let score = 0;
+
+        // Array de perguntas e respostas
+        const questions = [
+            {
+                pergunta: "Qual é a capital da França?",
+                respostas: ["Paris", "Londres", "Roma", "Berlim"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Quem escreveu 'Dom Quixote'?",
+                respostas: ["Miguel de Cervantes", "William Shakespeare", "Machado de Assis", "J.K. Rowling"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Qual é a capital da França?",
+                respostas: ["Paris", "Londres", "Roma", "Berlim"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Qual é o maior planeta do sistema solar?",
+                respostas: ["Terra", "Marte", "Júpiter", "Saturno"],
+                respostaCorreta: "C"
+            },
+            {
+                pergunta: "Qual é a fórmula química da água?",
+                respostas: ["H2O", "CO2", "O2", "NaCl"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Qual é o elemento químico com o símbolo 'O'?",
+                respostas: ["Oxigênio", "Ouro", "Prata", "Hidrogênio"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Quem pintou a Mona Lisa?",
+                respostas: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"],
+                respostaCorreta: "A"
+            },
+            {
+                pergunta: "Qual é a capital do Brasil?",
+                respostas: ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"],
+                respostaCorreta: "A"
+            },
+            // Adicione mais perguntas se necessário
+        ];
+
+        // Função para carregar a pergunta e as respostas
+        function loadQuestion() {
+            const currentQuestion = questions[questionIndex];
+            const perguntaElement = document.querySelector('.pergunta');
+            const respostasElement = document.querySelector('.respostas');
+            perguntaElement.textContent = currentQuestion.pergunta;
+            respostasElement.innerHTML = currentQuestion.respostas
+                .map((resposta, index) => {
+                    const label = String.fromCharCode(65 + index); // A, B, C, D...
+                    return `<button class="resposta" data-answer="${label}">${resposta}</button>`;
+                })
+                .join('');
+            progresso.textContent = `Pergunta ${questionIndex + 1} de ${questions.length}`;
+        }
+
+        // Listener de evento para as respostas
+        document.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('resposta')) {
+                const selectedAnswer = e.target.getAttribute('data-answer');
+                const correctAnswer = questions[questionIndex].respostaCorreta;
+
+                // Verificar se a resposta está correta
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                }
+
+                // Desabilitar todos os botões após a escolha
+                const buttons = document.querySelectorAll('.resposta');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                });
+
+                // Avançar para a próxima pergunta após um pequeno delay
+                setTimeout(function () {
+                    questionIndex++;
+
+                    // Se houver mais perguntas, carregue a próxima
+                    if (questionIndex < questions.length) {
+                        loadQuestion();
+                        // Restaurar a cor dos botões
+                        buttons.forEach(button => {
+                            button.style.backgroundColor = ''; // Resetar cor
+                            button.disabled = false; // Habilitar os botões novamente
+                        });
+                    } else {
+                        // Fim do jogo
+                        fim.style.display = 'flex';
+                        scoreElement.textContent = score;
+                        totalElement.textContent = questions.length;
+                    }
+                }, 1000); // Atraso de 1 segundo antes de carregar a próxima pergunta
+            }
+        });
+
+        // Evento de clique para o botão "Tentar novamente"
+        reiniciarBtn.addEventListener('click', function () {
+            questionIndex = 0; // Reseta o índice da pergunta
+            score = 0; // Reseta a pontuação
+            fim.style.display = 'none'; // Esconde a tela de fim de jogo
+            loadQuestion(); // Carrega a primeira pergunta novamente
+        });
+
+        // Inicializa o jogo
+        loadQuestion();
+    </script>
+</body>
+</html>

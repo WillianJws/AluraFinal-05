@@ -1,0 +1,143 @@
+body {
+    background: url("https://b1614029.smushcdn.com/1614029/wp-content/uploads/2016/09/dicas-para-nao-pesar-o-bolso-na-sua-viagem-para-praia-quanto-custa.jpg?lossy=2&strip=1&webp=1") no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Gabarito", sans-serif;
+    margin: 20px;
+}
+
+.logo {
+    text-align: end;
+}
+
+.logo img {
+    width: 40%;
+}
+
+/* Caixa principal do jogo */
+.conteudo-jogo {
+    background: rgba(11, 145, 145, 0.308);
+    box-shadow: 0 0 5px #d8ced2;
+    margin: 30px;
+    padding: 20px;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers content vertically */
+    margin-top: 2rem;
+}
+
+.conteudo-jogo:hover {
+    background: rgba(12, 15, 15, 0.521);
+    box-shadow: 0 0 5px #06dbdb;
+}
+
+/* Títulos e textos */
+h2, p {
+    color: white;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0); /* Adds a subtle shadow for better readability */
+}
+
+/* Estrutura do questionário */
+.questionario {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 70%;
+    max-width: 70%;
+}
+
+/* Área de conteúdo */
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    gap: 20px;
+}
+
+/* Estilo da pergunta */
+.pergunta {
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(238, 238, 238, 0.5);
+}
+
+/* Progresso da pergunta */
+.progresso {
+    text-align: end;
+    font-size: small;
+    font-weight: 500;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Área das respostas */
+.respostas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Botões de resposta */
+.botao-resposta {
+    width: 100%;
+    height: 2.5rem;
+    text-align: start;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    background: #f1eeef;
+    color: white;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.botao-resposta:hover {
+    background: #19caca;
+    font-weight: 600;
+    transform: scale(1.05); /* Adds a subtle zoom-in effect */
+}
+
+/* Tela de fim do jogo */
+.fim {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.fim span {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(238, 227, 227, 0.5);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .conteudo-jogo {
+        flex-direction: column;
+        height: auto;
+    }
+    .questionario {
+        width: 90%;
+    }
+}
+
+/* Estilo para o botão de reiniciar */
+.reiniciar {
+    background: #06e724;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+    border-radius: 5px; /* Adds rounded corners for a more modern look */
+}
+
+.reiniciar:hover {
+    background: #19caca;
+    font-weight: 600;
+    transform: scale(1.05); /* Adds a subtle zoom-in effect */
+}
